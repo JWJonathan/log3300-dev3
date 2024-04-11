@@ -7,7 +7,21 @@ from app_gestion_employes.models import Employees
 from app_gestion_employes.forms import EmployeeForm  # Si vous utilisez un formulaire Django
 
 
+def home_page(request):
+    # employees = Employees.objects.all()
+    return render(request, 'homepage.html')
 
+def about(request):
+    # employees = Employees.objects.all()
+    return render(request, 'about.html')
+
+def services(request):
+    # employees = Employees.objects.all()
+    return render(request, 'services.html')
+
+def contact(request):
+    # employees = Employees.objects.all()
+    return render(request, 'contact.html')
 
 def employee_list(request):
     employees = Employees.objects.all()
