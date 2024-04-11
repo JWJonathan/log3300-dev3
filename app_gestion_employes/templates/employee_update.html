@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Employee Data</title>
+    <!-- Link Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Update Employee Data</h1>
+    <form method="post" action="{% url 'update_employee' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="employee_id">Employee ID:</label>
+            <input type="text" class="form-control" id="employee_id" name="employee_id" required>
+        </div>
+        <div class="form-group">
+            <label for="first_name">First Name:</label>
+            <input type="text" class="form-control" id="first_name" name="first_name">
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name:</label>
+            <input type="text" class="form-control" id="last_name" name="last_name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="phone_number">Phone Number:</label>
+            <input type="text" class="form-control" id="phone_number" name="phone_number">
+        </div>
+        <div class="form-group">
+            <label for="hire_date">Hire Date:</label>
+            <input type="date" class="form-control" id="hire_date" name="hire_date">
+        </div>
+        <div class="form-group">
+            <label for="job_title">Job Title:</label>
+            <input type="text" class="form-control" id="job_title" name="job_title">
+        </div>
+        <div class="form-group">
+            <label for="department">Department:</label>
+            <select class="form-control" id="department" name="department">
+                {% for department in employees %}
+                    <option value="{{ department.id }}">{{ department.department_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="manager">Manager:</label>
+            <select class="form-control" id="manager" name="manager">
+                {% for employee in employees %}
+                    <option value="{{ employee.employee_id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Employee</button>
+    </form>
+</div>
+
+<!-- Link Bootstrap JS (Optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
