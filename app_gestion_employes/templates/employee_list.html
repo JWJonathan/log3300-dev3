@@ -9,7 +9,7 @@
     
      <!-- Bootstrap core CSS -->
     <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"> 
     
     
     <!-- Additional CSS Files -->
@@ -22,7 +22,7 @@
    
     
   </head>
-<body class="img-fill" style="background-color: rgb(27 55 30 / 72%);">
+<body style="background-color: rgb(27 55 30 / 72%);">
  
     <!-- ***** Preloader Start ***** -->
     <!-- <div id="preloader">
@@ -59,25 +59,25 @@
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><h2>Finance Business</h2></a>
+          <a class="navbar-brand" href="{% url 'home_page' %}"><h2>Finance Business</h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#top">Home
+                <a class="nav-link" href="{% url 'home_page' %}">Home
                   <span class="sr-only">(current)</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">About Us</a>
+                <a class="nav-link" href="{% url 'about.html' %}">About Us</a>
               </li>  
               <li class="nav-item">
-                <a class="nav-link" href="services.html">Our Services</a>
+                <a class="nav-link" href="{% url 'services.html' %}">Our Services</a>
               </li>                          
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact Us</a>
+                <a class="nav-link" href="{% url 'contact.html' %}">Contact Us</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'employee_list' %}">Our employees</a>
@@ -106,7 +106,7 @@
                               
                               </tr>
                           </thead>
-                          <tbody>
+                          <tbody class="text-white">
                             {% for employee in employees %}
                             <tr>
                               <th scope="row">{{ employee.employee_id }}</th>
@@ -119,13 +119,17 @@
                               <td>{{ employee.department_name }}</td>
                               <!-- <td>{{ employee.manager_id }}</td> -->
                               <!-- template.html -->
-                              <td style="padding-right: 50px;"><a href="{% url 'employee_details' employee_id=employee.employee_id %}">Plus</a></td>
+                              <td style="padding-right: 50px;"><a style=" color: whitesmoke!important;" href="{% url 'employee_details' employee_id=employee.employee_id %}">Plus</a></td>
 
                             </tr>
                             {% endfor %} 
                           
                           </tbody>
                         </table>
+                        <div class="col-12" style="margin-top: 20px; margin-left: 10px;">
+                          
+                          <a style=" color: whitesmoke!important;" href="{% url 'employee_create' %}"><button type="submit" class="btn btn-primary btn-lg">Click to Add</button></a>
+                      </div>
                       </div>
                     </div>
       

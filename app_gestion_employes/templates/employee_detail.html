@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#top">Home
+              <a class="nav-link" href="{% url 'home_page' %}">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -92,6 +92,8 @@
                                   </form> -->
                                    <div class="container mt-4 text-center">
                                        <h1 class="display-4">Détails de l'employé</h1>
+                                       <div style="text-align: left; margin-left: 200px;">
+                                       <p class="lead">ID: {{ employee.employee_id }}</p>
                                        <p class="lead">Prénom: {{ employee.first_name }}</p>
                                        <p class="lead">Nom: {{ employee.last_name }}</p>
                                        <p class="lead">Email: {{ employee.email }}</p>
@@ -100,8 +102,13 @@
                                        <p class="lead">Titre d'emploi : {{ employee.job_title }}</p>
                                        <p class="lead">Nom du Departement: {{ employee.department_name }}</p>
                                        <p class="lead">Manager ID: {{ employee.manager_id }}</p>
+                                      </div>
                                     </div>
-    
+                                    <div style="margin-top: 10px;">
+                                       <a href="{% url 'employee_list' %}"><button class="btn btn-warning submit" style="margin-left: 350px;">Retour</button></a>
+                                       <a href="{% url 'update_employee' employee_id=employee.employee_id %}"><button class="btn btn-info" style="margin-left: 10px;";>Modifier</button></a>
+                                       <a href="{% url 'employee_delete' employee_id=employee.employee_id %}"><button onclick="return confirm('Voulez-vous vraiment supprimer cet employé?')" class="btn btn-danger" style="margin-left: 10px;";>Supprimer</button></a>
+                                      </diV>
                                 </div>
                             <!-- </div> -->
                         </div>

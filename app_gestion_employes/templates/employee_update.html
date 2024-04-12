@@ -4,14 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Employee Data</title>
+    {% load static %}
     <!-- Link Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     
+       <!-- Bootstrap core CSS -->
+    <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    
+    
+    <!-- Additional CSS Files -->
+    <!-- <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-finance-business.css">
+    <link rel="stylesheet" href="assets/css/owl.css"> -->
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-finance-business.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    
+
 </head>
 <body>
 
-<div class="container mt-5">
+<!-- <div class="container mt-5">
     <h1>Update Employee Data</h1>
-    <form method="post" action="{% url 'update_employee' %}">
+    <form method="post">
         {% csrf_token %}
         <div class="form-group">
             <label for="employee_id">Employee ID:</label>
@@ -59,7 +75,51 @@
         </div>
         <button type="submit" class="btn btn-primary">Update Employee</button>
     </form>
-</div>
+</div> -->
+
+<section class="h-100 bg-dark">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+                <div class="card card-registration my-4">
+                    <div class="row g-0 display-block">
+                        
+                        <!-- <div class="col-xl-6"> -->
+                            <div class="card-body p-md-5 text-black">
+                                <h3 class="mb-5 text-uppercase">Update Employee</h3>
+
+                                <form method="post" class="row g-3">
+                                  {% csrf_token %}
+                                  {% for field in form %}
+                                      <div class="col-md-6">
+                                          <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                          {% if field.errors %}
+                                              <ul class="errors">
+                                                  {% for error in field.errors %}
+                                                      <li>{{ error }}</li>
+                                                  {% endfor %}
+                                              </ul>
+                                          {% endif %}
+                                          <input type="{{ field.field.widget.input_type }}" class="form-control form-control-lg col-md-6" id="{{ field.id_for_label }}" name="{{ field.name }}" value="{{ field.value }}" {% if field.field.required %}required{% endif %}>
+                                          {% if field.help_text %}
+                                              <small class="form-text text-muted">{{ field.help_text }}</small>
+                                          {% endif %}
+                                      </div>
+                                  {% endfor %}
+                                  <div class="col-12" style="margin-top: 20px; margin-left: 10px;">
+                                      <button type="submit" class="btn btn-primary btn-lg">Submit form</button>
+                                  </div>
+                              </form>
+                              
+
+                            </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Link Bootstrap JS (Optional) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

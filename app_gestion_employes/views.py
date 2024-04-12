@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_POST
 from django.http import HttpResponse
 # Create your views here.
 # from .models import Department
@@ -35,6 +36,13 @@ def employee_details(request, employee_id):
     }
     return render(request, 'employee_detail.html', context)
 
+@require_POST
+def employee_delete(request, employee_id):
+    employee = get_object_or_404(Employees, employee_id=employee_id)
+    employee.delete()
+    return redirect('employee_list')
+    
+
 
 
 def employee_create(request):
@@ -55,9 +63,45 @@ def employee_create(request):
     return render(request, 'employee_create.html', {'form': form})
 
 
-def employee_update(request):
-    employees = Employees.objects.all()
-    return render(request, 'employee_update.html', {'employees': employees})
+
+def employee_update(request, employee_id):
+    employee = get_object_or_404(Employees, employee_id=employee_id)
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, instance=employee)
+        if form.is_valid():
+            
+            # Sauvegarde du formulaire mais sans commiter à la base de données
+            employee = form.save(commit=False)
+            # Maintenant, nous pouvons accéder au champ du département dans le formulaire
+            department_name = form.cleaned_data['department_name']
+            # Assigner le nom du département à l'employé
+            employee.department_name = department_name
+            # Enregistrer l'employé avec le département attribué
+            employee.save()
+            return redirect('employee_list')  # Redirige vers la liste des employés après la création réussie
+    else:
+        form = EmployeeForm(instance=employee)
+    return render(request, 'employee_update.html', {'form': form})
+
+# def employee_update(request, employee_id):
+#      if request.method == 'POST':
+#         employee = get_object_or_404(Employees, employee_id=employee_id)
+#         form = EmployeeForm(request.POST)
+#           if form.is_valid():
+#             # Sauvegarde du formulaire mais sans commiter à la base de données
+#             employee = form.save(commit=False)
+#             # Maintenant, nous pouvons accéder au champ du département dans le formulaire
+#             department_name = form.cleaned_data['department_name']
+#             # Assigner le nom du département à l'employé
+#             employee.department_name = department_name
+#             # Enregistrer l'employé avec le département attribué
+#             employee.save()
+#             return redirect('employee_list')  # Redirige vers la liste des employés après la création réussie
+#       else:
+#         form = EmployeeForm()
+   
+#     return render(request, 'employee_update.html', {'form': form})
+
 
 def employee_delete(request):
     employees = Employees.objects.all()
