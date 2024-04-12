@@ -1,0 +1,1 @@
+Mon pc ne supporte pas l'enregistrement d'écran a cause de son ancienneté
